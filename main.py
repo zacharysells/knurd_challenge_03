@@ -1,42 +1,3 @@
-"""
-[1,9] : 100
-[1 2 3 4 5 6 7 8 9] : 100
-
-1 + 23456789 == 100 # false
-1 - 23456789 == 100 # false
-
-[2,9] == 99
-
-12 + 3456789 == 100 # false
-12 - 3456789 == 100 # false
-
-.
-.
-.
-
-1 + 23 + 456789 == 100 # false
-1 - 23 + 456789 == 100 # false
-1 + 23 - 456789 == 100 # false
-1 - 23 - 456789 == 100 # false
-
-
-
-
-[1,4] : 100
-1 + 234 == 100
-
-2 + 34 == 99
-2 - 34 == 99
-
-
-
-
-1 - 234 == 100
-
-2 + 34 == 101
-2 - 34 == 101
-"""
-
 mem = {}
 
 def solve(eq):
@@ -66,9 +27,9 @@ def find_matches(l, total):
 
     if not l:
         return []
-
-    if l in mem:
-        return mem[l]
+    #
+    # if l in mem:
+    #     return mem[l]
 
     equations = []
     for i in range(1, len(l)):
@@ -81,7 +42,7 @@ def find_matches(l, total):
             equations.append([str(first), '-'] + eq)
 
 
-    mem[l] = equations
+    # mem[l] = equations
     return equations
 
 
@@ -106,7 +67,7 @@ def list_to_int(l):
 
 def main():
     l = 1
-    r = 11
+    r = 10
     total = 1058
     lrange = range(l, r+1)
 
