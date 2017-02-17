@@ -1,7 +1,11 @@
+from flask import request, url_for, jsonify
+from flask.ext.api import FlaskAPI, status, exceptions
+
+app = FlaskAPI(__name__)
+
 mem = {}
 
 def solve(eq):
-
     total = int(eq[0])
     i = 1
     while True:
@@ -21,15 +25,12 @@ def solve(eq):
 def find_matches(l, total):
     """
     Takes a list of consecutive integers, i.e [1,2,3,4] and a total, i.e 100.
-    Uses dynamic programming to     recursivly find arrangments of '-' and '+' that, when inserted into the list,
+    Uses dynamic programming to recursivly find arrangments of '-' and '+' that, when inserted into the list,
     create an equation that is correct.
     """
 
     if not l:
         return []
-    #
-    # if l in mem:
-    #     return mem[l]
 
     equations = []
     for i in range(1, len(l)):
@@ -65,16 +66,17 @@ def list_to_int(l):
 
     return int(s)
 
-def main():
-    l = 1
-    r = 10
-    total = 1058
+
+@app.route("/", methods=['GET'])
+def calculate_eqs():
+    l = int(request.args.get('l'))
+    r = int(request.args.get('r'))
+    total = int(request.args.get('t'))
     lrange = range(l, r+1)
 
-    equations = find_matches(lrange, total)
-    for e in equations:
-        if solve(e):
-            print e
+    equations = [' '.join(e) for e in find_matches(lrange, total) if solve(e)]
+
+    return jsonify(equations)
 
 if __name__ == "__main__":
-    main()
+    app.run(host="0.0.0.0")
