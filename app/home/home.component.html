@@ -3,16 +3,22 @@
   <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%); -ms-transform: translate(-50%, -50%); -moz-transform: translate(-50%, -50%); -o-transform: translate(-50%, -50%); width: 70%;">
     <div class="row">
       <div class="col-xs-12">
+        <label><span style="color: white;">Quiet Mode: </span><input type="checkbox" ng-model="quietMode"></label>
         <form name="numberForm" ng-submit="submit()">
           <input style="width:33%; font-size:10em; color:white; background: rgba(255,255,255,0.3); text-align: center;" type="number" name="l" ng-model="l">
           <input style="width:33%; font-size:10em; color:white; background: rgba(255,255,255,0.3); text-align: center;" type="number" name="r" ng-model="r">
           <input style="width:33%; font-size:10em; color:white; background: rgba(255,255,255,0.3); text-align: center;" type="number" name="t" ng-model="t">
           <button class="btn btn-block btn-primary" style="background-color: rgba(51,122,183,0.6);" type="submit">Submit</button>
         </form>
-        <div style="height: 25vh; overflow: auto;">
+        <div ng-hide="quietMode" style="height: 25vh; overflow: auto;">
           <div style="color:white; background: rgba(255,255,255,0.3);" ng-repeat="result in results track by $index">
             {{result}}
           </div>          
+        </div>
+        <div ng-show="quietMode" style="height: 25vh; overflow: auto;">
+          <div style="color:white; background: rgba(255,255,255,0.3);">
+            {{results.length}}
+          </div>
         </div>
         <div style="color:white; background: rgba(255,255,255,0.3);" ng-show="error">
           {{error}}

@@ -103,6 +103,7 @@ homeModule.controller('HomeCtrl', ['$scope', '$http', '$window', function($scope
       $scope.error = 'There was an error in calculating your information. Refer to the console.';
     });
   };
+  $scope.submit();
 }]);
 
 homeModule.component('home', {
