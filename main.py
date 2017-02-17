@@ -1,7 +1,7 @@
 from flask import request, url_for, jsonify, send_from_directory
 from flask.ext.api import FlaskAPI, status, exceptions
 
-app = FlaskAPI(__name__, static_url_path='/app')
+app = FlaskAPI(__name__)
 
 mem = {}
 
@@ -80,11 +80,12 @@ def calculate_eqs():
 
 @app.route('/')
 def root():
-    return app.send_static_file('index.html')
+    print 'hit index'
+    return send_from_directory('app', 'index.html')
 
 @app.route('/<path:path>')
 def send_static(path):
-    return send_from_directory(path)
+    return send_from_directory('app', path)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0")
