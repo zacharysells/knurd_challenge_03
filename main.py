@@ -1,7 +1,7 @@
-from flask import request, url_for, jsonify
+from flask import request, url_for, jsonify, send_from_directory
 from flask.ext.api import FlaskAPI, status, exceptions
 
-app = FlaskAPI(__name__)
+app = FlaskAPI(__name__, static_url_path='/app')
 
 mem = {}
 
@@ -67,7 +67,7 @@ def list_to_int(l):
     return int(s)
 
 
-@app.route("/", methods=['GET'])
+@app.route("/calc", methods=['GET'])
 def calculate_eqs():
     l = int(request.args.get('l'))
     r = int(request.args.get('r'))
@@ -77,6 +77,14 @@ def calculate_eqs():
     equations = [' '.join(e) for e in find_matches(lrange, total) if solve(e)]
 
     return jsonify(equations)
+
+@app.route('/')
+def root():
+    return app.send_static_file('index.html')
+
+@app.route('/<path:path>')
+def send_static(path):
+    return send_from_directory(path)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0")
