@@ -12,6 +12,6 @@ knurdModule.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
   $stateProvider
     .state('home', {
       url: "/",
-      template: "<home></home>"
+      template: "<home style=\"height:100%;\"></home>"
     });
 }]);
