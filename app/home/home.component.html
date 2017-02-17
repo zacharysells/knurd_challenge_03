@@ -1,7 +1,13 @@
-<h1>test</h1>
+<h1>Knurd 3</h1>
 <form name="numberForm" ng-submit="submit()">
-    <input type="number" name="l" ng-model="l">
-    <input type="number" name="r" ng-model="r">
-    <input type="number" name="t" ng-model="t">
-    <button type="submit">Submit</button>
+  <input type="number" name="l" ng-model="l">
+  <input type="number" name="r" ng-model="r">
+  <input type="number" name="t" ng-model="t">
+  <button type="submit">Submit</button>
 </form>
+<div ng-repeat="result in results track by $index">
+  {{result}}
+</div>
+<div ng-show="error">
+  {{error}}
+</div>
